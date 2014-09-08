@@ -1,0 +1,107 @@
+#ifndef OS2_INCLUDED
+   #include <os2.h>
+#endif
+DLGINCLUDE 1 "ids.h"
+
+DLGTEMPLATE IDD_ABOUT LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Product Information", IDD_ABOUT, 1, 1, 196, 65, WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR | FCF_CLOSEBUTTON
+            PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    BEGIN
+        ICON            ID_MAINPROGRAM,                     201,            7,   44,  20,  16
+        DEFPUSHBUTTON   "~OK",                              DID_CANCEL,     38,  2,   40,  12
+        LTEXT           "ULS Codepage Map",                 -1,             38,  51,  150, 8
+                        PRESPARAMS PP_FONTNAMESIZE,         "9.WarpSans Bold"
+        LTEXT           "version 1.2",                      -1,             38,  42,  150, 8
+        GROUPBOX        "",                                 -1,             38,  39,  150, 4
+        LTEXT           "(C) 2011 Alex Taylor",             -1,             38,  27,  150, 8
+        LTEXT           "Released under the revised BSD license."
+                                                            -1,             38,  18,  150, 8
+    END
+END
+
+
+CODEPAGE 850
+DLGTEMPLATE IDD_CODEPAGE
+BEGIN
+    DIALOG  "Select Codepage", IDD_CODEPAGE, 1, 1, 121, 30, FS_NOBYTEALIGN | FS_MOUSEALIGN, FCF_SYSMENU | FCF_TITLEBAR | FCF_CLOSEBUTTON
+            PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    BEGIN
+        LTEXT           "Codepage number:",                 -1,             3,   18,  60,  8,  DT_VCENTER
+        COMBOBOX        "",                                 IDD_CPSELECT,   67,  -40, 50,  67, CBS_DROPDOWN | WS_GROUP
+        DEFPUSHBUTTON   "~OK",                              DID_OK,         3,   2,   40,  12, WS_GROUP
+        PUSHBUTTON      "~Cancel",                          DID_CANCEL,     45,  2,   40,  12
+    END
+END
+
+
+CODEPAGE 850
+DLGTEMPLATE IDD_FONTDLG
+BEGIN
+    DIALOG  "Font", IDD_FONTDLG, 1, 1, 153, 95, FS_NOBYTEALIGN | FS_MOUSEALIGN, FCF_SYSMENU | FCF_TITLEBAR | FCF_CLOSEBUTTON
+            PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    BEGIN
+/* Font dialog controls we actually use */
+        LTEXT           "Name:",                                -1,                 3,   85,  100, 8,   DT_VCENTER
+        COMBOBOX        "",                                     DID_NAME,           3,   2,   147, 82,  NOT CBS_SIMPLE | CBS_DROPDOWNLIST
+        LTEXT           "Style:",                               -1,                 3,   64,  100, 8,   DT_VCENTER
+        COMBOBOX        "",                                     DID_STYLE,          3,   17,  147, 46,  NOT CBS_SIMPLE | CBS_DROPDOWNLIST
+        DEFPUSHBUTTON   "~OK",                                  DID_OK_BUTTON,      3,   2,   40,  12,  WS_GROUP
+        PUSHBUTTON      "Cancel",                               DID_CANCEL_BUTTON,  45,  2,   40,  12,  NOT WS_TABSTOP
+        GROUPBOX        "Sample",                               -1,                 3,   18,  147, 33
+        CTEXT           "abcdABCD",                             DID_SAMPLE,         7,   22,  138, 21,  DT_VCENTER
+                        PRESPARAMS PP_BACKGROUNDCOLOR,          0x00CCCCCCL
+                        PRESPARAMS PP_HILITEBACKGROUNDCOLOR,    0x00CCCCCCL
+                        PRESPARAMS PP_DISABLEDBACKGROUNDCOLOR,  0x00CC00CCL
+/* Standard font dialog controls required by PM but not used by us */
+        COMBOBOX        "",                                     DID_SIZE,           191, 0,   29,  16,  NOT CBS_SIMPLE | CBS_DROPDOWN | NOT WS_VISIBLE
+        AUTOCHECKBOX    "~Display",                             DID_DISPLAY_FILTER, 158, 59,  52,  10,  NOT WS_VISIBLE
+        AUTOCHECKBOX    "~Printer",                             DID_PRINTER_FILTER, 158, 49,  51,  10,  NOT WS_TABSTOP | NOT WS_VISIBLE
+        AUTOCHECKBOX    "Out~line",                             DID_OUTLINE,        158, 39,  42,  10,  NOT WS_VISIBLE
+        AUTOCHECKBOX    "~Underline",                           DID_UNDERSCORE,     158, 29,  46,  10,  NOT WS_TABSTOP | NOT WS_VISIBLE
+        AUTOCHECKBOX    "~Strikeout",                           DID_STRIKEOUT,      158, 19,  47,  10,  NOT WS_TABSTOP | NOT WS_VISIBLE
+    END
+END
+
+
+CODEPAGE 850
+DLGTEMPLATE IDD_CPINFO
+BEGIN
+    DIALOG  "Codepage Information", IDD_CPINFO, 1, 1, 291, 120, FS_NOBYTEALIGN | FS_MOUSEALIGN, FCF_SYSMENU | FCF_TITLEBAR | FCF_CLOSEBUTTON
+            PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    BEGIN
+        DEFPUSHBUTTON   "Close",                            DID_OK,         3,   2,   40,  12,  WS_GROUP
+        GROUPBOX        "Leading-byte value types",         -1,             3,   17,  235, 68
+        GROUPBOX        "",                                 -1,             237, 17,  51,  68
+        LTEXT           "Single-byte characters:",          -1,             8,   61,  44,  15,  DT_WORDBREAK
+        LISTBOX                                             IDD_SINGLE,     8,   21   40,  40,  WS_GROUP
+        LTEXT           "Two-byte characters:",             -1,             54,  61,  44,  15,  DT_WORDBREAK
+        LISTBOX                                             IDD_2LEADING,   54,  21   40,  40,  WS_GROUP
+        LTEXT           "Three-byte characters:",           -1,             100, 61,  44,  15,  DT_WORDBREAK
+        LISTBOX                                             IDD_3LEADING,   100, 21   40,  40,  WS_GROUP
+        LTEXT           "Four-byte characters:",            -1,             146, 61,  44,  15,  DT_WORDBREAK
+        LISTBOX                                             IDD_4LEADING,   146, 21   40,  40,  WS_GROUP
+        LTEXT           "Illegal codepoints:",              -1,             192, 61,  44,  15,  DT_WORDBREAK
+        LISTBOX                                             IDD_CODEPOINTS, 192, 21   40,  40,  WS_GROUP
+        LTEXT           "Secondary bytes:",                 -1,             241, 61,  44,  15,  DT_WORDBREAK
+        LISTBOX                                             IDD_FOLLOWING,  241, 21   40,  40,  WS_GROUP
+        LTEXT           "Encoding scheme:",                 -1,             3,   107, 112, 8,   DT_VCENTER
+        LTEXT           "",                                 IDD_ENCODING,   119, 107, 88,  8,   DT_VCENTER
+        LTEXT           "Substitution character:",          -1,             3,   98,  112, 8,   DT_VCENTER
+        LTEXT           "",                                 IDD_SUBCHAR,    119, 98,  88,  8,   DT_VCENTER
+        LTEXT           "Number of bytes per character:",   -1,             3,   89,  112, 8,   DT_VCENTER
+        LTEXT           "",                                 IDD_CHARBYTES,  119, 89,  88,  8,   DT_VCENTER
+    END
+END
+
+CODEPAGE 850
+DLGTEMPLATE IDD_METRICS
+BEGIN
+    DIALOG  "Font Metrics", IDD_METRICS, 1, 1, 260, 180, FS_NOBYTEALIGN | FS_MOUSEALIGN, FCF_SYSMENU | FCF_TITLEBAR | FCF_CLOSEBUTTON
+            PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    BEGIN
+        CONTAINER                                           IDD_FONTDATA,   1,   15,  258, 163, CCS_SINGLESEL | CCS_READONLY | CCS_AUTOPOSITION | CCS_MINIRECORDCORE | WS_GROUP
+        DEFPUSHBUTTON   "~Close",                           DID_OK,         110, 1,   40,  12,  WS_GROUP
+    END
+END
+

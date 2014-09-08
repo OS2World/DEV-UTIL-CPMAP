@@ -1,0 +1,46 @@
+#define INCL_NLS
+#include <os2.h>
+#include "ids.h"
+
+ICON ID_MAINPROGRAM "cpmap.ico"
+
+MENU ID_MAINPROGRAM
+BEGIN
+    SUBMENU  "~Codepage",                           IDM_FILE
+    BEGIN
+        MENUITEM "~Select...\tCtrl+S",              ID_CODEPAGE,    MIS_TEXT
+        MENUITEM "~Information...\tCtrl+I",         ID_INFO,        MIS_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "E~xit\tF3",                       ID_QUIT,        MIS_TEXT
+    END
+    SUBMENU  "~Options",                            IDM_SETTINGS
+    BEGIN
+        MENUITEM "~Font...\tCtrl+F",                ID_FONT,        MIS_TEXT
+        MENUITEM "View font ~metrics...\tCtrl+M",   ID_FONTMETRICS, MIS_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "Show ~UCS values\tCtrl+U",        ID_UCS,         MIS_TEXT
+    END
+    SUBMENU  "~Help",                               IDM_HELP
+    BEGIN
+        MENUITEM "~Product Information",            ID_ABOUT,       MIS_TEXT
+    END
+END
+
+ACCELTABLE ID_MAINPROGRAM
+BEGIN
+    VK_F3,      ID_QUIT,        VIRTUALKEY
+    VK_ESC,     ID_BACK,        VIRTUALKEY
+    "f",        ID_FONT,        CHAR, CONTROL
+    "F",        ID_FONT,        CHAR, CONTROL
+    "i",        ID_INFO,        CHAR, CONTROL
+    "I",        ID_INFO,        CHAR, CONTROL
+    "m",        ID_FONTMETRICS, CHAR, CONTROL
+    "M",        ID_FONTMETRICS, CHAR, CONTROL
+    "s",        ID_CODEPAGE,    CHAR, CONTROL
+    "S",        ID_CODEPAGE,    CHAR, CONTROL
+    "u",        ID_UCS,         CHAR, CONTROL
+    "U",        ID_UCS,         CHAR, CONTROL
+END
+
+RCINCLUDE "cpmap.dlg"
+
